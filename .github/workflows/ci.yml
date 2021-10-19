@@ -1,0 +1,34 @@
+---
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+  workflow_dispatch: {}
+
+env:
+  CACHE_VERSION: v1
+  TERRAFORM_VERSION: "1.0.9"
+
+jobs:
+  tflint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          key: "${{ runner.os }}-${{ env.TERRAFORM_VERSION }}-${{ env.CACHE_VERSION }}-${{ github.sha }}"
+          restore-keys: |
+            ${{ runner.os }}-${{ env.TERRAFORM_VERSION }}-${{ env.CACHE_VERSION }}
+          path: |
+            ~/.tflint.d/plugins
+      - uses: terraform-linters/setup-tflint@v1
+        with:
+          tflint_version: latest
+      - run: tflint --version
+      - run: tflint --init
+      - run: tflint -f compact --loglevel=info
