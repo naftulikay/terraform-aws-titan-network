@@ -11,11 +11,7 @@ resource aws_vpc default {
   enable_dns_hostnames = true
   enable_dns_support = true
 
-  tags = {
-    Name = "${var.name_short}.${var.domain}"
-    titan_network = var.name
-    titan_zone = "${var.name_short}.${var.domain}"
-  }
+  tags = merge({ Name = "${var.name_short}.${var.domain}" }, local.resource_tags)
 }
 
 # The VPC's DHCP Options Set
@@ -29,11 +25,7 @@ resource aws_vpc_dhcp_options default {
   netbios_name_servers = var.netbios_name_servers
   netbios_node_type = var.netbios_node_type
 
-  tags = {
-    Name = "${var.name_short}.${var.domain}"
-    titan_network = var.name
-    titan_zone = "${var.name_short}.${var.domain}"
-  }
+  tags = merge({ Name = "${var.name_short}.${var.domain}" }, local.resource_tags)
 
   lifecycle {
     create_before_destroy = true

@@ -10,11 +10,13 @@ resource aws_route53_zone public {
   name = "${var.name_short}.${var.domain}"
   delegation_set_id = aws_route53_delegation_set.default.id
 
-  tags = {
-    Name = "${var.name_fancy} Public Hosted Zone"
-    titan_zone = "${var.name_short}.${var.domain}"
-    titan_dns_horizon = "public"
-  }
+  tags = merge(
+    {
+      Name = "${var.name_fancy} Public Hosted Zone"
+      titan_dns_horizon = "public"
+    },
+    local.resource_tags
+  )
 }
 
 # Private/Internal Route 53 Hosted Zone
@@ -24,11 +26,13 @@ resource aws_route53_zone private {
     vpc_id = aws_vpc.default.id
   }
 
-  tags = {
-    Name = "${var.name_fancy} Private Hosted Zone"
-    titan_zone = "${var.name_short}.${var.domain}"
-    titan_dns_horizon = "private"
-  }
+  tags = merge(
+    {
+      Name = "${var.name_fancy} Public Hosted Zone"
+      titan_dns_horizon = "private"
+    },
+    local.resource_tags
+  )
 }
 
 # Reverse Route 53 Hosted Zone
@@ -38,9 +42,11 @@ resource aws_route53_zone reverse {
     vpc_id = aws_vpc.default.id
   }
 
-  tags = {
-    Name = "${var.name_fancy} Reverse Hosted Zone"
-    titan_zone = "${var.name_short}.${var.domain}"
-    titan_dns_horizon = "private"
-  }
+  tags = merge(
+    {
+      Name = "${var.name_fancy} Reverse Hosted Zone"
+      titan_dns_horizon = "reverse"
+    },
+    local.resource_tags
+  )
 }

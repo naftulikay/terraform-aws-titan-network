@@ -21,11 +21,7 @@ resource aws_default_security_group default {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = {
-    Name = "titan_${var.name_short}_default"
-    titan_network = var.name
-    titan_zone = "${var.name_short}.${var.domain}"
-  }
+  tags = merge({ Name = "titan_${var.name_short}_default" }, local.resource_tags)
 }
 
 # Security Group Allowing Network-Internal SSH Access
@@ -50,9 +46,5 @@ resource aws_security_group ssh {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-  tags = {
-    Name = "titan_${var.name_short}_ssh_internal"
-    titan_network = var.name
-    titan_zone = "${var.name_short}.${var.domain}"
-  }
+  tags = merge({ Name = "titan_${var.name_short}_ssh_internal" }, local.resource_tags)
 }

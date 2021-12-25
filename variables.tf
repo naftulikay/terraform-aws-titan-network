@@ -1,5 +1,13 @@
 # Titan Network Module - Variables
 
+variable addtl_tags {
+  type = map(string)
+  default = {}
+  description = <<-EOF
+    Additional tags to apply to all resources.
+  EOF
+}
+
 variable name {
   description = <<-EOF
     Long name of the Titan network.
