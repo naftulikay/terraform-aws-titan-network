@@ -4,4 +4,5 @@
 resource aws_sns_topic autoscaling {
   name = "titan_${var.name_short}_autoscaling_topic"
   display_name = "SNS Notification Topic for Auto-Scaling Events in the ${var.name_fancy}."
+  tags = merge({ Name = "titan_${var.name_short}_autoscaling_topic" }, local.resource_tags)
 }

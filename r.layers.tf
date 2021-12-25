@@ -3,7 +3,7 @@
 # The DMZ Layer: WAN-Facing
 module "dmz_layer" {
   source = "naftulikay/titan-layer/aws"
-  version = "~> 2.0.0"
+  version = "~> 2.1.0"
 
   name = "dmz"
   is_public = true
@@ -16,12 +16,14 @@ module "dmz_layer" {
   internet_gateway_id = aws_internet_gateway.default.id
   cidr_start = 0 * 5
   nat_enabled = var.nat_enabled
+
+  addtl_tags = var.addtl_tags
 }
 
 # The Routing Layer: Layer 5 and Layer 7 Routing
 module "routing_layer" {
   source = "naftulikay/titan-layer/aws"
-  version = "~> 2.0.0"
+  version = "~> 2.1.0"
 
   name = "routing"
   availability_zones = slice(data.aws_availability_zones.default.names, 0, var.subnets_per_layer)
@@ -34,12 +36,14 @@ module "routing_layer" {
   egress_only_gateway_id = aws_egress_only_internet_gateway.default.id
   nat_enabled = var.nat_enabled
   nat_gateway_ids = aws_nat_gateway.default.*.id
+
+  addtl_tags = var.addtl_tags
 }
 
 # The Service Layer: Application Servers and Services
 module "service_layer" {
   source = "naftulikay/titan-layer/aws"
-  version = "~> 2.0.0"
+  version = "~> 2.1.0"
 
   name = "service"
   availability_zones = slice(data.aws_availability_zones.default.names, 0, var.subnets_per_layer)
@@ -52,12 +56,14 @@ module "service_layer" {
   egress_only_gateway_id = aws_egress_only_internet_gateway.default.id
   nat_enabled = var.nat_enabled
   nat_gateway_ids = aws_nat_gateway.default.*.id
+
+  addtl_tags = var.addtl_tags
 }
 
 # The Data Layer: Data-Stores
 module "data_layer" {
   source = "naftulikay/titan-layer/aws"
-  version = "~> 2.0.0"
+  version = "~> 2.1.0"
 
   name = "data"
   availability_zones = slice(data.aws_availability_zones.default.names, 0, var.subnets_per_layer)
@@ -70,12 +76,14 @@ module "data_layer" {
   egress_only_gateway_id = aws_egress_only_internet_gateway.default.id
   nat_enabled = var.nat_enabled
   nat_gateway_ids = aws_nat_gateway.default.*.id
+
+  addtl_tags = var.addtl_tags
 }
 
 # The Admin Layer: Administrative Services
 module "admin_layer" {
   source = "naftulikay/titan-layer/aws"
-  version = "~> 2.0.0"
+  version = "~> 2.1.0"
 
   name = "admin"
   availability_zones = slice(data.aws_availability_zones.default.names, 0, var.subnets_per_layer)
@@ -88,12 +96,14 @@ module "admin_layer" {
   egress_only_gateway_id = aws_egress_only_internet_gateway.default.id
   nat_enabled = var.nat_enabled
   nat_gateway_ids = aws_nat_gateway.default.*.id
+
+  addtl_tags = var.addtl_tags
 }
 
 # The Net Layer: Networking Equipment and Services
 module "net_layer" {
   source = "naftulikay/titan-layer/aws"
-  version = "~> 2.0.0"
+  version = "~> 2.1.0"
 
   name = "net"
   availability_zones = slice(data.aws_availability_zones.default.names, 0, var.subnets_per_layer)
@@ -110,4 +120,6 @@ module "net_layer" {
   egress_only_gateway_id = aws_egress_only_internet_gateway.default.id
   nat_enabled = var.nat_enabled
   nat_gateway_ids = aws_nat_gateway.default.*.id
+
+  addtl_tags = var.addtl_tags
 }

@@ -7,12 +7,11 @@ resource aws_nat_gateway default {
   allocation_id = aws_eip.nat[count.index].id
   subnet_id = module.dmz_layer.subnet_ids[count.index]
 
-  tags = {
-    Name = "nat-${count.index}.${var.name_short}.${var.domain}"
-    titan_layer = "dmz"
-    titan_network = var.name
-    titan_zone = "${var.name_short}.${var.domain}"
-  }
+  tags = merge({
+      Name = "nat-${count.index}.${var.name_short}.${var.domain}"
+      titan_layer = "dmz"
+    }, local.resource_tags
+  )
 
   lifecycle {
     create_before_destroy = true

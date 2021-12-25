@@ -8,6 +8,14 @@ output account_id {
   EOF
 }
 
+output addtl_tags {
+  value = var.addtl_tags
+
+  description = <<-EOF
+    Additional tags applied to resources.
+  EOF
+}
+
 output availability_zones {
   value = slice(data.aws_availability_zones.default.names, 0, var.subnets_per_layer)
 
@@ -46,5 +54,13 @@ output region {
 
   description = <<-EOF
     The AWS region in which this Titan network lives.
+  EOF
+}
+
+output resource_tags {
+  value = local.resource_tags
+
+  description = <<-EOF
+    Common tags associated with all resources.
   EOF
 }
