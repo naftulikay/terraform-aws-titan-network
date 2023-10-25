@@ -15,6 +15,7 @@ variable domain_name_servers {
 }
 
 variable instance_tenancy {
+  type = string
   default = "default"
 
   description = <<-EOF
@@ -38,6 +39,7 @@ variable netbios_name_servers {
 }
 
 variable netbios_node_type {
+  type = number
   default = 2
 
   description = <<-EOF
@@ -50,6 +52,7 @@ variable netbios_node_type {
 }
 
 variable network_id {
+  type = number
   description = <<-EOF
     The second octet to use for this Titan network.
 
@@ -78,7 +81,8 @@ variable ntp_servers {
 }
 
 variable subnets_per_layer {
-  default = "3"
+  type = number
+  default = 3
 
   description = <<-EOF
     The amount of subnets to create per layer. Titan layers are composed of this number of subnets distributed across

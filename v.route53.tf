@@ -1,6 +1,7 @@
 # Titan Network Module - Route 53 Variables
 
 variable domain {
+  type = string
   description = <<-EOF
     The base domain to derive network hosted zones from.
 

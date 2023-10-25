@@ -9,6 +9,7 @@ variable addtl_tags {
 }
 
 variable name {
+  type = string
   description = <<-EOF
     Long name of the Titan network.
 
@@ -19,6 +20,7 @@ variable name {
 }
 
 variable name_short {
+  type = string
   description = <<-EOF
     Short name of the Titan network.
 
@@ -29,6 +31,7 @@ variable name_short {
 }
 
 variable name_fancy {
+  type = string
   description = <<-EOF
     "Fancy" name for the Titan network.
 
