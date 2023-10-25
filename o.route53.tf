@@ -1,7 +1,7 @@
 # Titan Network Module - Route 53 Outputs
 
 output delegation_set_id {
-  value = aws_route53_delegation_set.default.id
+  value = var.public_dns ? aws_route53_delegation_set.default[0].id : null
 
   description = <<-EOF
     Unique identifier for the Route 53 delegation set associated with the public Route 53 hosted zone for this Titan
@@ -12,7 +12,7 @@ output delegation_set_id {
 }
 
 output delegation_set_name_servers {
-  value = aws_route53_delegation_set.default.name_servers
+  value = var.public_dns ? aws_route53_delegation_set.default[0].name_servers : null
 
   description = <<-EOF
     A set of Amazon name servers serving the public Route 53 hosted zone for this Titan network.
@@ -44,7 +44,7 @@ output private_zone_id {
 }
 
 output public_zone_id {
-  value = aws_route53_zone.public.zone_id
+  value = var.public_dns ? aws_route53_zone.public[0].zone_id : null
 
   description = <<-EOF
     The Amazon hosted zone identifier for the public Route 53 hosted zone for this Titan network.

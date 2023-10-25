@@ -11,3 +11,14 @@ variable domain {
     Examples: `mydomain.com`, `mycompanydomain.com`, `uswest1.mydomain.com`. 
   EOF
 }
+
+variable public_dns {
+  type = bool
+  default = true
+
+  description = <<-EOF
+    Whether to create a public Route 53 hosted zone.
+
+    If you are hosting your public DNS elsewhere, you should probably set this to false.
+  EOF
+}
