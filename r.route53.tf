@@ -2,13 +2,17 @@
 
 # Set of Name Servers for Public DNS Resolution
 resource aws_route53_delegation_set default {
+  count = var.public_dns ? 1 : 0
+
   reference_name = "${var.name_short}.${var.domain}"
 }
 
 # Public Route 53 Hosted Zone
 resource aws_route53_zone public {
+  count = var.public_dns ? 1 : 0
+
   name = "${var.name_short}.${var.domain}"
-  delegation_set_id = aws_route53_delegation_set.default.id
+  delegation_set_id = aws_route53_delegation_set.default[0].id
 
   tags = merge(
     {
