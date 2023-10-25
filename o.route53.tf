@@ -43,6 +43,16 @@ output private_zone_id {
   EOF
 }
 
+output public_dns {
+  value = var.public_dns
+
+  description = <<-EOF
+    Whether this network has public DNS enabled in Route 53.
+
+    If this value is false, no public Route 53 zone or delegation set will be created.
+  EOF
+}
+
 output public_zone_id {
   value = var.public_dns ? aws_route53_zone.public[0].zone_id : null
 
