@@ -7,7 +7,6 @@ resource aws_vpc default {
 
   assign_generated_ipv6_cidr_block = true
 
-  enable_classiclink = false
   enable_dns_hostnames = true
   enable_dns_support = true
 

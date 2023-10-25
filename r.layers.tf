@@ -35,7 +35,7 @@ module "routing_layer" {
   cidr_start = 1 * 5
   egress_only_gateway_id = aws_egress_only_internet_gateway.default.id
   nat_enabled = var.nat_enabled
-  nat_gateway_ids = aws_nat_gateway.default.*.id
+  nat_gateway_ids = [aws_nat_gateway.default[*].id]
 
   addtl_tags = var.addtl_tags
 }
@@ -55,7 +55,7 @@ module "service_layer" {
   cidr_start = 2 * 5
   egress_only_gateway_id = aws_egress_only_internet_gateway.default.id
   nat_enabled = var.nat_enabled
-  nat_gateway_ids = aws_nat_gateway.default.*.id
+  nat_gateway_ids = [aws_nat_gateway.default[*].id]
 
   addtl_tags = var.addtl_tags
 }
@@ -75,7 +75,7 @@ module "data_layer" {
   cidr_start = 3 * 5
   egress_only_gateway_id = aws_egress_only_internet_gateway.default.id
   nat_enabled = var.nat_enabled
-  nat_gateway_ids = aws_nat_gateway.default.*.id
+  nat_gateway_ids = [aws_nat_gateway.default[*].id]
 
   addtl_tags = var.addtl_tags
 }
@@ -95,7 +95,7 @@ module "admin_layer" {
   cidr_start = 4 * 5
   egress_only_gateway_id = aws_egress_only_internet_gateway.default.id
   nat_enabled = var.nat_enabled
-  nat_gateway_ids = aws_nat_gateway.default.*.id
+  nat_gateway_ids = [aws_nat_gateway.default[*].id]
 
   addtl_tags = var.addtl_tags
 }
@@ -119,7 +119,7 @@ module "net_layer" {
 
   egress_only_gateway_id = aws_egress_only_internet_gateway.default.id
   nat_enabled = var.nat_enabled
-  nat_gateway_ids = aws_nat_gateway.default.*.id
+  nat_gateway_ids = [aws_nat_gateway.default[*].id]
 
   addtl_tags = var.addtl_tags
 }

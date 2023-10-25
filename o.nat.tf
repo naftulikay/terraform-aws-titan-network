@@ -9,7 +9,7 @@ output nat_enabled {
 }
 
 output nat_allocation_ids {
-  value = aws_nat_gateway.default.*.allocation_id
+  value = [aws_nat_gateway.default[*].allocation_id]
 
   description = <<-EOF
     The Elastic IP allocation ids for each NAT Gateway in this Titan network.
@@ -19,7 +19,7 @@ output nat_allocation_ids {
 }
 
 output nat_gateway_ids {
-  value = aws_nat_gateway.default.*.id
+  value = [aws_nat_gateway.default[*].id]
 
   description = <<-EOF
     Ids for each NAT Gateway in this Titan network.
@@ -29,7 +29,7 @@ output nat_gateway_ids {
 }
 
 output nat_subnet_ids {
-  value = aws_nat_gateway.default.*.subnet_id
+  value = [aws_nat_gateway.default[*].subnet_id]
 
   description = <<-EOF
     The ids of the subnets associated with each NAT Gateway.
@@ -40,7 +40,7 @@ output nat_subnet_ids {
 }
 
 output nat_interface_ids {
-  value = aws_nat_gateway.default.*.network_interface_id
+  value = [aws_nat_gateway.default[*].network_interface_id]
 
   description = <<-EOF
     The ids of the network interfaces associated with each NAT Gateway.
@@ -50,7 +50,7 @@ output nat_interface_ids {
 }
 
 output nat_private_ips {
-  value = aws_nat_gateway.default.*.private_ip
+  value = [aws_nat_gateway.default[*].private_ip]
 
   description = <<-EOF
     The private IPv4 addresses of each NAT Gateway.
@@ -60,7 +60,7 @@ output nat_private_ips {
 }
 
 output nat_public_ips {
-  value = aws_nat_gateway.default.*.public_ip
+  value = [aws_nat_gateway.default[*].public_ip]
 
   description = <<-EOF
     The public IPv4 addresses of each NAT Gateway.

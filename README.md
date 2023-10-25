@@ -1,4 +1,4 @@
-# terraform-aws-titan-network ![Build Status][build.svg]
+# terraform-aws-titan-network [![Build Status][build.svg]][build] [![Terraform Module][module.svg]][module]
 
 Terraform module implementing a Titan Network for AWS.
 
@@ -21,8 +21,6 @@ The default layers are:
  5. **Admin**: Used for network admin resources, such as Logstash, Nagios, Kubernetes master nodes, etc.
  6. **Net**: Extensible layer for exotic network services.
 
-[Registry Link][registry]
-
 ## License
 
 Licensed at your discretion under either:
@@ -30,8 +28,10 @@ Licensed at your discretion under either:
  - [Apache Software License, Version 2.0](./LICENSE-APACHE)
  - [MIT License](./LICENSE-MIT)
 
- [build.svg]: https://github.com/naftulikay/terraform-aws-titan-network/actions/workflows/ci.yml/badge.svg
+ [build]:     https://github.com/naftulikay/terraform-aws-titan-network/actions/workflows/terraform.yml
+ [build.svg]: https://github.com/naftulikay/terraform-aws-titan-network/actions/workflows/terraform.yml/badge.svg
+ [module]:     https://registry.terraform.io/modules/naftulikay/titan-network/aws/latest
+ [module.svg]: https://img.shields.io/badge/terraform-module-purple
  [titan-environment]: https://github.com/naftulikay/terraform-aws-titan-environment
  [titan-layer]: https://github.com/naftulikay/terraform-aws-titan-layer 
  [titan-hub]: https://github.com/naftulikay/terraform-aws-titan-hub
- [registry]: https://registry.terraform.io/modules/naftulikay/titan-network/aws/latest

@@ -1,0 +1,46 @@
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch: {}
+
+env:
+  CACHE_VERSION: v1
+  TF_PLUGIN_CACHE_DIR: ~/.terraform.d/plugin-cache
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          key: ${{ runner.os }}-${{ github.job }}-${{ env.CACHE_VERSION }}-${{ github.sha }}
+          path: |
+            ~/.tflint.d/plugins
+          restore-keys: |
+            ${{ runner.os }}-${{ github.job }}-${{ env.CACHE_VERSION }}-
+      - uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: latest
+      - run: tflint --init
+      - run: tflint -f compact
+
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          key: ${{ runner.os }}-${{ github.job }}-${{ env.CACHE_VERSION }}-${{ github.sha }}
+          path: |
+            ~/.terraform.d/plugin-cache
+          restore-keys: |
+            ${{ runner.os }}-${{ github.job }}-${{ env.CACHE_VERSION }}-
+      - uses: hashicorp/setup-terraform@v2
+      - run: make validate

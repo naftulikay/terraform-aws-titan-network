@@ -22,8 +22,6 @@ resource aws_nat_gateway default {
 resource aws_eip nat {
   count = var.nat_enabled ? var.subnets_per_layer : 0
 
-  vpc = true
-
   lifecycle {
     create_before_destroy = true
   }
