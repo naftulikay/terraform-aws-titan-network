@@ -4,7 +4,7 @@
 resource aws_default_route_table r {
   default_route_table_id = aws_vpc.default.default_route_table_id
 
-  tags = merge({ Name = "${var.name_short}.${var.domain} Default Route Table" }, local.resource_tags)
+  tags = merge({ Name = "${local.zone_name} Default Route Table" }, local.resource_tags)
 }
 
 resource aws_route ipv4_egress_nat {

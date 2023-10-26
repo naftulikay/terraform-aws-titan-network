@@ -29,7 +29,7 @@ output domain {
   description = <<-EOF
     Value of the `domain` variable exported for usability.
 
-    Note that this is not a FQDN ending with a period.
+    Note that this is not a FQDN ending with a period. If you are using `zone_override`, this value will not be useful.
   EOF
 }
 
@@ -84,11 +84,19 @@ output reverse_zone_id {
 }
 
 output zone {
-  value = "${var.name_short}.${var.domain}"
+  value = aws_route53_zone.private.name
 
   description = <<-EOF
     The hosted zone domain name for this Titan network.
 
     Note that this is not a FQDN ending with a period.
+  EOF
+}
+
+output zone_override {
+  value = var.zone_override
+
+  description = <<-EOF
+    Convenience output with the value of the `zone_override` variable.
   EOF
 }

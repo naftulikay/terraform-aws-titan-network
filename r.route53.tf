@@ -4,14 +4,14 @@
 resource aws_route53_delegation_set default {
   count = var.public_dns ? 1 : 0
 
-  reference_name = "${var.name_short}.${var.domain}"
+  reference_name = local.zone_name
 }
 
 # Public Route 53 Hosted Zone
 resource aws_route53_zone public {
   count = var.public_dns ? 1 : 0
 
-  name = "${var.name_short}.${var.domain}"
+  name = local.zone_name
   delegation_set_id = aws_route53_delegation_set.default[0].id
 
   tags = merge(
@@ -25,7 +25,7 @@ resource aws_route53_zone public {
 
 # Private/Internal Route 53 Hosted Zone
 resource aws_route53_zone private {
-  name = "${var.name_short}.${var.domain}"
+  name = local.zone_name
   vpc {
     vpc_id = aws_vpc.default.id
   }
