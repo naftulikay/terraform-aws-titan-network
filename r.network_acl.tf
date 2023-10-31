@@ -44,5 +44,5 @@ resource aws_default_network_acl default {
     ipv6_cidr_block = "::/0"
   }
 
-  tags = merge({ Name = "${var.name_short}.${var.domain} Default Network ACL" }, local.resource_tags)
+  tags = merge({ Name = "${local.zone_name} Default Network ACL" }, local.resource_tags)
 }

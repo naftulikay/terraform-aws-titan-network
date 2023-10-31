@@ -8,7 +8,7 @@ resource aws_nat_gateway default {
   subnet_id = module.dmz_layer.subnet_ids[count.index]
 
   tags = merge({
-      Name = "nat-${count.index}.${var.name_short}.${var.domain}"
+      Name = "nat-${count.index}.${local.zone_name}"
       titan_layer = "dmz"
     }, local.resource_tags
   )

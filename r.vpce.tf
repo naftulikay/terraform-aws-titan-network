@@ -1,15 +1,14 @@
 # Titan Network Module - VPC Endpoint Resourcees
 
-resource aws_vpc_endpoint s3 {
-  vpc_id = aws_vpc.default.id
-  service_name = data.aws_vpc_endpoint_service.s3.service_name
+resource aws_vpc_endpoint gateway {
+  # create a vpc endpoint for each specified gateway service
+  for_each = length(local.vpce_route_table_ids) > 0 ? var.aws_vpce_gateway_services : toset([])
 
-  route_table_ids = concat(
-    module.dmz_layer.route_table_ids,
-    module.routing_layer.route_table_ids,
-    module.service_layer.route_table_ids,
-    module.data_layer.route_table_ids,
-    module.admin_layer.route_table_ids,
-    module.net_layer.route_table_ids
-  )
+  vpc_id = aws_vpc.default.id
+  service_name = data.aws_vpc_endpoint_service.gateway[each.value].service_name
+
+  # attach to all layer route table ids specified in var.aws_vpce_gateway_services_layers
+  route_table_ids = local.vpce_route_table_ids
+
+  tags = merge({ Name = "${each.value}.${local.zone_name}" }, local.resource_tags)
 }

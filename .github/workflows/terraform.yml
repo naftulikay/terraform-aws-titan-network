@@ -2,11 +2,9 @@ on:
   push:
     branches:
       - main
-      - master
   pull_request:
     branches:
       - main
-      - master
   workflow_dispatch: {}
 
 env:
@@ -25,6 +23,7 @@ jobs:
             ~/.tflint.d/plugins
           restore-keys: |
             ${{ runner.os }}-${{ github.job }}-${{ env.CACHE_VERSION }}-
+      - run: install -d ~/.tflint.d/plugins
       - uses: terraform-linters/setup-tflint@v4
         with:
           tflint_version: latest
@@ -42,5 +41,6 @@ jobs:
             ~/.terraform.d/plugin-cache
           restore-keys: |
             ${{ runner.os }}-${{ github.job }}-${{ env.CACHE_VERSION }}-
+      - run: install -d ~/.terraform.d/plugin-cache
       - uses: hashicorp/setup-terraform@v2
       - run: make validate
