@@ -3,5 +3,5 @@
 .terraform
 .terraform.lock.hcl
 terraform.tfstate*
-
+/target
 /*stub*.tf
