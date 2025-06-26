@@ -30,6 +30,17 @@ output data_ipv6_cidr_blocks {
   EOF
 }
 
+output data_layer_resource_tags {
+  value = module.data_layer.resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the data Titan layer.
+
+    When creating a resource that is tied to the data layer, append these tags to the resource tags to ensure tagging
+    consistency.
+  EOF
+}
+
 output data_network_acl_id {
   value = module.data_layer.network_acl_id
 

@@ -28,6 +28,17 @@ output admin_ipv6_cidr_blocks {
   EOF
 }
 
+output admin_layer_resource_tags {
+  value = module.network.admin_layer_resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the admin Titan layer.
+
+    When creating a resource that is tied to the admin layer, append these tags to the resource tags to ensure tagging
+    consistency.
+  EOF
+}
+
 output admin_network_acl_id {
   value = module.network.admin_network_acl_id
 
@@ -83,6 +94,17 @@ output data_ipv6_cidr_blocks {
     A list of IPv6 CIDR blocks for each of the subnets in the data Titan layer.
 
     There will be `$${var.subnets_per_layer}` values in this list.
+  EOF
+}
+
+output data_layer_resource_tags {
+  value = module.network.data_layer_resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the data Titan layer.
+
+    When creating a resource that is tied to the data layer, append these tags to the resource tags to ensure tagging
+    consistency.
   EOF
 }
 
@@ -144,6 +166,17 @@ output dmz_ipv6_cidr_blocks {
   EOF
 }
 
+output dmz_layer_resource_tags {
+  value = module.network.dmz_layer_resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the DMZ Titan layer.
+
+    When creating a resource that is tied to the DMZ layer, append these tags to the resource tags to ensure tagging
+    consistency.
+  EOF
+}
+
 output dmz_network_acl_id {
   value = module.network.dmz_network_acl_id
 
@@ -199,6 +232,17 @@ output net_ipv6_cidr_blocks {
     A list of IPv6 CIDR blocks for each of the subnets in the net Titan layer.
 
     There will be `$${var.subnets_per_layer}` values in this list.
+  EOF
+}
+
+output net_layer_resource_tags {
+  value = module.network.net_layer_resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the net Titan layer.
+
+    When creating a resource that is tied to the net layer, append these tags to the resource tags to ensure tagging
+    consistency.
   EOF
 }
 
@@ -260,6 +304,17 @@ output routing_ipv6_cidr_blocks {
   EOF
 }
 
+output routing_layer_resource_tags {
+  value = module.network.routing_layer_resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the routing Titan layer.
+
+    When creating a resource that is tied to the routing layer, append these tags to the resource tags to ensure tagging
+    consistency.
+  EOF
+}
+
 output routing_network_acl_id {
   value = module.network.routing_network_acl_id
 
@@ -315,6 +370,17 @@ output service_ipv6_cidr_blocks {
     A list of IPv6 CIDR blocks for each of the subnets in the service Titan layer.
 
     There will be `$${var.subnets_per_layer}` values in this list.
+  EOF
+}
+
+output service_layer_resource_tags {
+  value = module.network.service_layer_resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the service Titan layer.
+
+    When creating a resource that is tied to the service layer, append these tags to the resource tags to ensure tagging
+    consistency.
   EOF
 }
 
@@ -1013,6 +1079,17 @@ output name_short {
 
   description = <<-EOF
     Short name of the Titan network.
+  EOF
+}
+
+output network_resource_tags {
+  value = module.network.network_resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the Titan Network.
+
+    When creating a resource that is tied to the network but not to a specific layer, append these tags to the resource
+    tags to ensure tagging consistency.
   EOF
 }
 

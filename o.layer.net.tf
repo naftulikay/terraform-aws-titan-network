@@ -30,6 +30,17 @@ output net_ipv6_cidr_blocks {
   EOF
 }
 
+output net_layer_resource_tags {
+  value = module.net_layer.resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the net Titan layer.
+
+    When creating a resource that is tied to the net layer, append these tags to the resource tags to ensure tagging
+    consistency.
+  EOF
+}
+
 output net_network_acl_id {
   value = module.net_layer.network_acl_id
 

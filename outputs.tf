@@ -49,6 +49,17 @@ output name_short {
   EOF
 }
 
+output network_resource_tags {
+  value = local.resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the Titan Network.
+
+    When creating a resource that is tied to the network but not to a specific layer, append these tags to the resource
+    tags to ensure tagging consistency.
+  EOF
+}
+
 output region {
   value = data.aws_region.default.name
 

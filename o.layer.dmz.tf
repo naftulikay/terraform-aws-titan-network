@@ -30,6 +30,17 @@ output dmz_ipv6_cidr_blocks {
   EOF
 }
 
+output dmz_layer_resource_tags {
+  value = module.dmz_layer.resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the DMZ Titan layer.
+
+    When creating a resource that is tied to the DMZ layer, append these tags to the resource tags to ensure tagging
+    consistency.
+  EOF
+}
+
 output dmz_network_acl_id {
   value = module.dmz_layer.network_acl_id
 
