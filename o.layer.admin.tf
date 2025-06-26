@@ -30,6 +30,17 @@ output admin_ipv6_cidr_blocks {
   EOF
 }
 
+output admin_layer_resource_tags {
+  value = module.admin_layer.resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the admin Titan layer.
+
+    When creating a resource that is tied to the admin layer, append these tags to the resource tags to ensure tagging
+    consistency.
+  EOF
+}
+
 output admin_network_acl_id {
   value = module.admin_layer.network_acl_id
 

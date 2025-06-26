@@ -30,6 +30,17 @@ output routing_ipv6_cidr_blocks {
   EOF
 }
 
+output routing_layer_resource_tags {
+  value = module.routing_layer.resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the routing Titan layer.
+
+    When creating a resource that is tied to the routing layer, append these tags to the resource tags to ensure tagging
+    consistency.
+  EOF
+}
+
 output routing_network_acl_id {
   value = module.routing_layer.network_acl_id
 

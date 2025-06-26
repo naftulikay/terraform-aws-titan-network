@@ -30,6 +30,17 @@ output service_ipv6_cidr_blocks {
   EOF
 }
 
+output service_layer_resource_tags {
+  value = module.service_layer.resource_tags
+
+  description = <<-EOF
+    Common tags for resources created in the service Titan layer.
+
+    When creating a resource that is tied to the service layer, append these tags to the resource tags to ensure tagging
+    consistency.
+  EOF
+}
+
 output service_network_acl_id {
   value = module.service_layer.network_acl_id
 
